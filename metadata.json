@@ -1,0 +1,8 @@
+{
+  "name": "WeatherNow",
+  "description": "Check current weather, hourly forecasts, 7-day forecasts, air quality, wind, humidity and more for cities around the world.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
