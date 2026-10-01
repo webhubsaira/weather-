@@ -49,6 +49,7 @@ import { Footer } from './components/Footer';
 import { LoadingSkeleton } from './components/LoadingSkeleton';
 import { ErrorMessage } from './components/ErrorMessage';
 import { MapPin, Globe } from 'lucide-react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 export default function App() {
   // User Preferences
@@ -472,6 +473,9 @@ export default function App() {
           </div>
         </div>
       )}
+
+      {/* Vercel Speed Insights */}
+      <SpeedInsights />
     </div>
   );
 }
