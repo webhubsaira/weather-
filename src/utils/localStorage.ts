@@ -6,6 +6,7 @@ const STORAGE_KEYS = {
   FAVORITES: 'weathernow_favorites',
   RECENT_SEARCHES: 'weathernow_recent_searches',
   LAST_LOCATION: 'weathernow_last_location',
+  CACHED_WEATHER: 'weathernow_cached_weather',
   API_KEY: 'weathernow_api_key',
 };
 
@@ -153,7 +154,18 @@ export function clearRecentSearches(): void {
 export function getLastLocation(): GeoLocation | null {
   try {
     const saved = localStorage.getItem(STORAGE_KEYS.LAST_LOCATION);
-    if (saved) return JSON.parse(saved);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (
+        parsed &&
+        typeof parsed.latitude === 'number' &&
+        !isNaN(parsed.latitude) &&
+        typeof parsed.longitude === 'number' &&
+        !isNaN(parsed.longitude)
+      ) {
+        return parsed;
+      }
+    }
   } catch (e) {
     console.warn('Could not read last location:', e);
   }
@@ -162,9 +174,42 @@ export function getLastLocation(): GeoLocation | null {
 
 export function saveLastLocation(loc: GeoLocation): void {
   try {
-    localStorage.setItem(STORAGE_KEYS.LAST_LOCATION, JSON.stringify(loc));
+    if (
+      loc &&
+      typeof loc.latitude === 'number' &&
+      !isNaN(loc.latitude) &&
+      typeof loc.longitude === 'number' &&
+      !isNaN(loc.longitude)
+    ) {
+      localStorage.setItem(STORAGE_KEYS.LAST_LOCATION, JSON.stringify(loc));
+    }
   } catch (e) {
     console.warn('Could not save last location:', e);
+  }
+}
+
+export function getCachedWeather(): any | null {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEYS.CACHED_WEATHER);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      // Valid cache if within 1 hour
+      if (parsed && parsed.fetchedAt && Date.now() - parsed.fetchedAt < 3600000) {
+        return parsed;
+      }
+      return parsed; // return even if older than 1hr for emergency offline fallback
+    }
+  } catch (e) {
+    console.warn('Could not read cached weather:', e);
+  }
+  return null;
+}
+
+export function saveCachedWeather(data: any): void {
+  try {
+    localStorage.setItem(STORAGE_KEYS.CACHED_WEATHER, JSON.stringify(data));
+  } catch (e) {
+    console.warn('Could not cache weather data:', e);
   }
 }
 
