@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import {
   GeoLocation,
   TempUnit,
@@ -472,6 +473,9 @@ export default function App() {
           </div>
         </div>
       )}
+
+      {/* Vercel Speed Insights */}
+      <SpeedInsights />
     </div>
   );
 }
