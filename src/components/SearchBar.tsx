@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, startTransition } from 'react';
 import { Search, MapPin, X, Clock, Loader2, Navigation, Sparkles } from 'lucide-react';
 import { GeoLocation } from '../types/weather';
 import { searchLocations } from '../services/weatherApi';
@@ -90,13 +90,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         // Strip country code if present from previous selection
         const cleanQuery = trimmed.includes(',') ? trimmed.split(',')[0].trim() : trimmed;
         const results = await searchLocations(cleanQuery || trimmed);
-        setSuggestions(results);
-        setSelectedIndex(-1);
-        if (results.length === 0) {
-          setSearchError('Location not found. Please check spelling.');
-        } else {
-          setSearchError(null);
-        }
+        startTransition(() => {
+          setSuggestions(results);
+          setSelectedIndex(-1);
+          if (results.length === 0) {
+            setSearchError('Location not found. Please check spelling.');
+          } else {
+            setSearchError(null);
+          }
+        });
       } catch (err) {
         console.error('Search error:', err);
         setSearchError('Network error while searching. Please try again.');

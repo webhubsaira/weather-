@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import { Layers, Maximize2, Minimize2, Navigation2, RefreshCw } from 'lucide-react';
 import { GeoLocation } from '../types/weather';
 

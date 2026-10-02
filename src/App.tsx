@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import {
   GeoLocation,
@@ -39,19 +39,31 @@ import { HourlyForecast } from './components/HourlyForecast';
 import { DailyForecast } from './components/DailyForecast';
 import { WeatherDetails } from './components/WeatherDetails';
 import { SunriseSunsetCard } from './components/SunriseSunsetCard';
-import { WeatherCharts } from './components/WeatherCharts';
 import { AirQualityCard } from './components/AirQualityCard';
-import { WeatherMap } from './components/WeatherMap';
 import { WeatherAlerts } from './components/WeatherAlerts';
 import { FavoriteLocations } from './components/FavoriteLocations';
-import { ApiConfigModal } from './components/ApiConfigModal';
-import { AboutSection } from './components/AboutSection';
-import { WeatherFaq } from './components/WeatherFaq';
 import { SponsorBanner } from './components/SponsorBanner';
 import { Footer } from './components/Footer';
 import { LoadingSkeleton } from './components/LoadingSkeleton';
 import { ErrorMessage } from './components/ErrorMessage';
 import { MapPin, Globe } from 'lucide-react';
+
+// Lazy load below-the-fold and heavy components to drastically improve FCP, LCP, and INP
+const WeatherCharts = lazy(() =>
+  import('./components/WeatherCharts').then((m) => ({ default: m.WeatherCharts }))
+);
+const WeatherMap = lazy(() =>
+  import('./components/WeatherMap').then((m) => ({ default: m.WeatherMap }))
+);
+const WeatherFaq = lazy(() =>
+  import('./components/WeatherFaq').then((m) => ({ default: m.WeatherFaq }))
+);
+const AboutSection = lazy(() =>
+  import('./components/AboutSection').then((m) => ({ default: m.AboutSection }))
+);
+const ApiConfigModal = lazy(() =>
+  import('./components/ApiConfigModal').then((m) => ({ default: m.ApiConfigModal }))
+);
 
 export default function App() {
   // User Preferences
@@ -397,11 +409,13 @@ export default function App() {
 
             {/* Interactive Trend Charts */}
             <div ref={chartsRef} className="scroll-mt-20">
-              <WeatherCharts
-                hourly={weatherData.hourly}
-                tempUnit={units.temperature}
-                windUnit={units.wind}
-              />
+              <Suspense fallback={<div className="h-64 rounded-2xl bg-white/70 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800/80 animate-pulse" />}>
+                <WeatherCharts
+                  hourly={weatherData.hourly}
+                  tempUnit={units.temperature}
+                  windUnit={units.wind}
+                />
+              </Suspense>
             </div>
 
             {/* Air Quality Section */}
@@ -411,7 +425,9 @@ export default function App() {
 
             {/* Interactive Weather Map with RainViewer Radar */}
             <div ref={radarRef} className="scroll-mt-20">
-              <WeatherMap location={weatherData.location} />
+              <Suspense fallback={<div className="h-[420px] rounded-2xl bg-white/70 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800/80 animate-pulse" />}>
+                <WeatherMap location={weatherData.location} />
+              </Suspense>
             </div>
 
             {/* Saved Locations Section */}
@@ -447,12 +463,16 @@ export default function App() {
 
             {/* Frequently Asked Questions & Forecast Guide (Google Search Snippet Rich Results) */}
             <div ref={faqRef} className="scroll-mt-20">
-              <WeatherFaq />
+              <Suspense fallback={<div className="h-48 rounded-2xl bg-white/70 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800/80 animate-pulse" />}>
+                <WeatherFaq />
+              </Suspense>
             </div>
 
             {/* About & Privacy Section */}
             <div ref={aboutRef} className="scroll-mt-20">
-              <AboutSection />
+              <Suspense fallback={<div className="h-48 rounded-2xl bg-white/70 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800/80 animate-pulse" />}>
+                <AboutSection />
+              </Suspense>
             </div>
           </>
         )}
@@ -462,12 +482,16 @@ export default function App() {
       <Footer onSelectSection={handleSelectSection} />
 
       {/* Settings & API Config Modal */}
-      <ApiConfigModal
-        isOpen={showSettingsModal}
-        onClose={() => setShowSettingsModal(false)}
-        units={units}
-        onUpdateUnits={handleUpdateUnits}
-      />
+      {showSettingsModal && (
+        <Suspense fallback={null}>
+          <ApiConfigModal
+            isOpen={showSettingsModal}
+            onClose={() => setShowSettingsModal(false)}
+            units={units}
+            onUpdateUnits={handleUpdateUnits}
+          />
+        </Suspense>
+      )}
 
       {/* Saved Locations Modal (if opened from navbar) */}
       {showFavoritesModal && (

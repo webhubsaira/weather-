@@ -64,9 +64,9 @@ export const CurrentWeatherCard: React.FC<CurrentWeatherCardProps> = ({
         <div className="flex items-start justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white font-sans">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white font-sans">
                 {location.name}
-              </h1>
+              </h2>
               {location.admin1 && location.admin1 !== location.name && (
                 <span className="text-sm sm:text-base font-normal text-slate-500 dark:text-slate-400">
                   · {location.admin1}
