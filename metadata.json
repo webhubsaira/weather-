@@ -1,8 +1,10 @@
 {
   "name": "WeatherNow",
-  "description": "Check current weather, hourly forecasts, 7-day forecasts, air quality, wind, humidity and more for cities around the world.",
+  "description": "Accurate live weather forecasts, interactive Doppler radar maps, hourly predictions, 7-day outlook, air quality index (AQI), and real-time severe weather alerts.",
   "requestFramePermissions": [
     "geolocation"
   ],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

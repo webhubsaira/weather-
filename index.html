@@ -3,12 +3,106 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WeatherNow – Live Weather Forecast</title>
-    <meta name="description" content="Check current weather, hourly forecasts, 7-day forecasts, air quality, wind, humidity and more for cities around the world." />
-    <meta property="og:title" content="WeatherNow – Live Weather Forecast" />
-    <meta property="og:description" content="Check current weather, hourly forecasts, 7-day forecasts, air quality, wind, humidity and more for cities around the world." />
+    
+    <!-- Primary Page Titles & SEO Metadata -->
+    <title>WeatherNow – Live Weather Forecast, Radar & Air Quality</title>
+    <meta name="description" content="Accurate live weather forecasts, interactive Doppler radar maps, hourly predictions, 7-day outlook, air quality index (AQI), and real-time severe weather alerts." />
+    <meta name="keywords" content="weather forecast, live weather, doppler radar, 7 day forecast, hourly weather, air quality index, UV index, severe weather alerts, precipitation tracker, local weather today" />
+    <meta name="author" content="WeatherNow Team" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://weathernow.live/" />
+    
+    <!-- Theme & Mobile App Presentation -->
+    <meta name="theme-color" content="#0284c7" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="WeatherNow" />
+
+    <!-- OpenGraph Social Cards (Facebook, LinkedIn, Discord, Slack) -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://weathernow.live/" />
+    <meta property="og:title" content="WeatherNow – Live Weather Forecast, Radar & Air Quality" />
+    <meta property="og:description" content="Accurate live weather forecasts, interactive Doppler radar maps, hourly predictions, 7-day outlook, air quality index (AQI), and severe alerts." />
+    <meta property="og:site_name" content="WeatherNow" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=1200&auto=format&fit=crop" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="WeatherNow Live Forecast and Radar Interface" />
+
+    <!-- Twitter / X Social Cards -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://weathernow.live/" />
+    <meta name="twitter:title" content="WeatherNow – Live Weather Forecast, Radar & Air Quality" />
+    <meta name="twitter:description" content="Track local temperatures, hourly precipitation, interactive Doppler radar, air quality, and severe storm warnings worldwide." />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=1200&auto=format&fit=crop" />
+
+    <!-- Schema.org JSON-LD Structured Data (Google Search Rich Snippets) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://weathernow.live/#app",
+          "name": "WeatherNow",
+          "url": "https://weathernow.live/",
+          "applicationCategory": "WeatherApplication",
+          "operatingSystem": "All",
+          "browserRequirements": "Requires modern web browser with JavaScript support",
+          "description": "Real-time weather tracking, interactive precipitation radar, hourly & 7-day forecasts, UV index, and air quality reports.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "featureList": [
+            "Real-time hyper-local temperature and weather conditions",
+            "Next 24-hour hour-by-hour forecast with precipitation chance",
+            "7-day extended meteorological outlook",
+            "Interactive live precipitation and cloud radar map",
+            "Comprehensive Air Quality Index (AQI) with PM2.5 and PM10 breakdown",
+            "Severe weather warning detection and safety advisories",
+            "Dark and light theme support"
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://weathernow.live/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How accurate is the WeatherNow live forecast?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "WeatherNow sources high-resolution meteorological models from leading global weather institutions via Open-Meteo, updating temperature, humidity, wind, and precipitation models continuously for hyper-local accuracy."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does the live weather radar map work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The radar map streams real-time composite Doppler radar imagery and cloud cover layers provided by RainViewer and OpenStreetMap, allowing you to track rainstorms, snow, and cloud systems as they move."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the Air Quality Index (AQI) and how is it calculated?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Air Quality Index measures particulate matter (PM2.5, PM10), Nitrogen Dioxide (NO2), Carbon Monoxide (CO), and ground-level Ozone (O3) against standard health thresholds to help you plan outdoor activities safely."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Fonts & Leaflet Stylesheet -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -19,4 +113,3 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

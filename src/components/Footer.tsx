@@ -59,6 +59,12 @@ export const Footer: React.FC<FooterProps> = ({ onSelectSection }) => {
               Saved Locations
             </button>
             <button
+              onClick={() => onSelectSection('faq')}
+              className="hover:text-sky-600 dark:hover:text-white transition-colors cursor-pointer"
+            >
+              FAQ & Guide
+            </button>
+            <button
               onClick={() => onSelectSection('about')}
               className="hover:text-sky-600 dark:hover:text-white transition-colors cursor-pointer"
             >

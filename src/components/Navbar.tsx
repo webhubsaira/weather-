@@ -35,6 +35,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'charts', label: 'Trends' },
     { id: 'radar', label: 'Radar' },
     { id: 'airquality', label: 'Air Quality' },
+    { id: 'faq', label: 'FAQ' },
   ];
 
   const handleLinkClick = (id: string) => {

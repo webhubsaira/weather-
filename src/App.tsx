@@ -46,6 +46,8 @@ import { WeatherAlerts } from './components/WeatherAlerts';
 import { FavoriteLocations } from './components/FavoriteLocations';
 import { ApiConfigModal } from './components/ApiConfigModal';
 import { AboutSection } from './components/AboutSection';
+import { WeatherFaq } from './components/WeatherFaq';
+import { SponsorBanner } from './components/SponsorBanner';
 import { Footer } from './components/Footer';
 import { LoadingSkeleton } from './components/LoadingSkeleton';
 import { ErrorMessage } from './components/ErrorMessage';
@@ -81,6 +83,7 @@ export default function App() {
   const radarRef = useRef<HTMLDivElement>(null);
   const airQualityRef = useRef<HTMLDivElement>(null);
   const favoritesRef = useRef<HTMLDivElement>(null);
+  const faqRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
 
   // Apply dark theme class to document element
@@ -233,6 +236,9 @@ export default function App() {
       case 'favorites':
         targetRef = favoritesRef;
         break;
+      case 'faq':
+        targetRef = faqRef;
+        break;
       case 'about':
         targetRef = aboutRef;
         break;
@@ -284,6 +290,9 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-5">
+        {/* Accessible SEO Primary Heading for Search Indexing */}
+        <h1 className="sr-only">WeatherNow – Real-Time Weather Forecast, Live Doppler Radar & Air Quality Index</h1>
+
         {/* Search Bar Section with Quick Switch Chips */}
         <section className="relative z-30" aria-label="Search and Geolocation">
           <SearchBar
@@ -431,6 +440,14 @@ export default function App() {
               <div>
                 <span>Last updated: {weatherData.current.localTime}</span>
               </div>
+            </div>
+
+            {/* Community Sponsor & Monetization Banner */}
+            <SponsorBanner />
+
+            {/* Frequently Asked Questions & Forecast Guide (Google Search Snippet Rich Results) */}
+            <div ref={faqRef} className="scroll-mt-20">
+              <WeatherFaq />
             </div>
 
             {/* About & Privacy Section */}
