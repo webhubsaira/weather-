@@ -62,7 +62,13 @@ export const Footer: React.FC<FooterProps> = ({ onSelectSection }) => {
               onClick={() => onSelectSection('faq')}
               className="hover:text-sky-600 dark:hover:text-white transition-colors cursor-pointer"
             >
-              FAQ & Guide
+              FAQ
+            </button>
+            <button
+              onClick={() => onSelectSection('guide')}
+              className="hover:text-sky-600 dark:hover:text-white transition-colors cursor-pointer"
+            >
+              Weather Guide
             </button>
             <button
               onClick={() => onSelectSection('about')}
@@ -77,35 +83,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectSection }) => {
         <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-600 dark:text-slate-400 font-medium">
           <p>© {new Date().getFullYear()} WeatherNow. All rights reserved.</p>
           <p className="text-center sm:text-right">
-            Weather data provided by{' '}
-            <a
-              href="https://open-meteo.com"
-              target="_blank"
-              rel="noreferrer"
-              className="text-sky-600 dark:text-sky-400 font-semibold hover:underline"
-            >
-              Open-Meteo
-            </a>
-            {' · '}
-            Radar by{' '}
-            <a
-              href="https://www.rainviewer.com"
-              target="_blank"
-              rel="noreferrer"
-              className="text-sky-600 dark:text-sky-400 font-semibold hover:underline"
-            >
-              RainViewer
-            </a>
-            {' · '}
-            Maps ©{' '}
-            <a
-              href="https://www.openstreetmap.org/copyright"
-              target="_blank"
-              rel="noreferrer"
-              className="text-sky-600 dark:text-sky-400 font-semibold hover:underline"
-            >
-              OpenStreetMap
-            </a>
+            Secured Atmospheric Observation Gateway & Radar Grid
           </p>
         </div>
 

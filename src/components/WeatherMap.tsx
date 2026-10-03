@@ -83,9 +83,7 @@ export const WeatherMap: React.FC<WeatherMapProps> = ({ location }) => {
     }
 
     if (activeLayer === 'radar') {
-      // Free RainViewer live global radar tiles (updates every 10 min)
-      // https://www.rainviewer.com/api.html
-      fetch('https://api.rainviewer.com/public/weather-maps.json')
+      fetch('/api/radar-meta')
         .then((res) => res.json())
         .then((data) => {
           if (data && data.radar && data.radar.past && data.radar.past.length > 0) {
@@ -109,7 +107,7 @@ export const WeatherMap: React.FC<WeatherMapProps> = ({ location }) => {
           }
         })
         .catch((err) => {
-          console.warn('RainViewer API load error:', err);
+          console.warn('Radar metadata load error:', err);
         });
     } else if (activeLayer === 'clouds') {
       // OpenWeatherMap / Open-Meteo tile or OpenStreetMap standard

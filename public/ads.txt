@@ -1,0 +1,5 @@
+# WeatherNow ads.txt - Authorized Digital Sellers
+# Replace the placeholder publisher ID with your Google AdSense or Ad Exchange Publisher ID
+# Example: google.com, pub-1234567890123456, DIRECT, f08c47fec0942fa0
+
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

@@ -36,6 +36,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'radar', label: 'Radar' },
     { id: 'airquality', label: 'Air Quality' },
     { id: 'faq', label: 'FAQ' },
+    { id: 'guide', label: 'Guide' },
   ];
 
   const handleLinkClick = (id: string) => {
@@ -153,13 +154,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </button>
 
-          {/* Settings / API Config Button */}
+          {/* Settings / Preferences Button */}
           <button
             type="button"
             onClick={onOpenSettings}
             className="w-9 h-9 flex items-center justify-center rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 transition-all shadow-xs cursor-pointer"
-            aria-label="Weather settings and API configuration"
-            title="Settings & API Configuration"
+            aria-label="Display and unit preferences"
+            title="Preferences & Units"
           >
             <Settings className="w-4 h-4 text-slate-600 dark:text-slate-400" />
           </button>

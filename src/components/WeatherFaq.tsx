@@ -10,12 +10,12 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     question: 'How accurate is the WeatherNow live forecast?',
     answer:
-      'WeatherNow sources high-resolution meteorological data from global numerical weather prediction models including ECMWF, GFS, and ICON via Open-Meteo. Forecasts are refreshed continuously, providing down-to-the-hour accuracy for temperature, precipitation probability, humidity, and wind gusts.',
+      'WeatherNow processes high-resolution meteorological models across international observation grids. Forecasts are refreshed continuously, providing down-to-the-hour accuracy for temperature, precipitation probability, humidity, and wind gusts.',
   },
   {
     question: 'How does the live weather radar map work?',
     answer:
-      'The interactive radar map streams composite Doppler radar imagery and high-altitude infrared satellite cloud layers provided by RainViewer and OpenStreetMap. You can track real-time rain storms, snowfall tracks, and cloud formations across any continent.',
+      'The interactive radar map streams composite Doppler radar imagery and high-altitude infrared satellite cloud layers. You can track real-time rain storms, snowfall tracks, and cloud formations across any region.',
   },
   {
     question: 'What is the Air Quality Index (AQI) and how should I use it?',

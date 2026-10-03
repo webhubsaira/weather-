@@ -29,31 +29,31 @@ export const AboutSection: React.FC = () => {
             <Compass className="w-5 h-5 text-sky-500 mb-2" />
             <h3 className="font-semibold text-sm text-slate-900 dark:text-white">Precision Data</h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              High-resolution forecasts provided by global numerical weather models via Open-Meteo.
+              High-resolution forecasts calculated by global numerical meteorological observation models.
             </p>
           </div>
 
           <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-700/30 border border-slate-100 dark:border-slate-700/60">
             <Shield className="w-5 h-5 text-emerald-500 mb-2" />
-            <h3 className="font-semibold text-sm text-slate-900 dark:text-white">Privacy-Friendly</h3>
+            <h3 className="font-semibold text-sm text-slate-900 dark:text-white">Privacy & Security</h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              Geolocation is only accessed upon your direct click. Your coordinates are never stored or tracked.
+              Protected by isolated server proxies. Coordinates are processed in memory and never tracked or sold.
             </p>
           </div>
 
           <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-700/30 border border-slate-100 dark:border-slate-700/60">
             <HeartHandshake className="w-5 h-5 text-amber-500 mb-2" />
-            <h3 className="font-semibold text-sm text-slate-900 dark:text-white">Open Standards</h3>
+            <h3 className="font-semibold text-sm text-slate-900 dark:text-white">Direct Meteorological Grid</h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              Powered by Open-Meteo, OpenStreetMap, and RainViewer open meteorological sources.
+              Live radar, satellite infrared scans, and atmospheric indices refreshed continuously.
             </p>
           </div>
         </div>
 
         <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/60 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
-          <span>Data Provider: Open-Meteo Weather API & RainViewer Radar</span>
+          <span>Protected Meteorological Data Gateway</span>
           <span className="italic">
-            Notice: Weather information is provided for planning guidance and is not guaranteed to be free of forecasting errors.
+            Notice: Weather forecasts are calculated for planning guidance and outdoor safety.
           </span>
         </div>
       </div>

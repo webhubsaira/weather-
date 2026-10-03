@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { X, Key, Check, Info, Sliders, ShieldCheck } from 'lucide-react';
-import { PressureUnit, UnitPreferences, VisibilityUnit, WindUnit } from '../types/weather';
-import { getCustomApiKey, saveCustomApiKey } from '../utils/localStorage';
+import { X, Check, Sliders, ShieldCheck } from 'lucide-react';
+import { PressureUnit, TempUnit, UnitPreferences, VisibilityUnit, WindUnit } from '../types/weather';
 
 interface ApiConfigModalProps {
   isOpen: boolean;
@@ -16,7 +15,6 @@ export const ApiConfigModal: React.FC<ApiConfigModalProps> = ({
   units,
   onUpdateUnits,
 }) => {
-  const [apiKey, setApiKey] = useState(getCustomApiKey());
   const [savedSuccess, setSavedSuccess] = useState(false);
   const [localUnits, setLocalUnits] = useState<UnitPreferences>(units);
 
@@ -24,13 +22,12 @@ export const ApiConfigModal: React.FC<ApiConfigModalProps> = ({
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
-    saveCustomApiKey(apiKey);
     onUpdateUnits(localUnits);
     setSavedSuccess(true);
     setTimeout(() => {
       setSavedSuccess(false);
       onClose();
-    }, 800);
+    }, 600);
   };
 
   return (
@@ -46,7 +43,7 @@ export const ApiConfigModal: React.FC<ApiConfigModalProps> = ({
           <div className="flex items-center gap-2.5">
             <Sliders className="w-5 h-5 text-sky-500" />
             <h2 id="settings-dialog-title" className="text-base font-bold text-slate-900 dark:text-white">
-              Preferences & API Configuration
+              Display & Measurement Preferences
             </h2>
           </div>
           <button
@@ -63,10 +60,26 @@ export const ApiConfigModal: React.FC<ApiConfigModalProps> = ({
           {/* Unit Settings */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
-              Measurement Units
+              Regional Units
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+              <div>
+                <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  Temperature
+                </label>
+                <select
+                  value={localUnits.temperature}
+                  onChange={(e) =>
+                    setLocalUnits({ ...localUnits, temperature: e.target.value as TempUnit })
+                  }
+                  className="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-700/60 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+                >
+                  <option value="C">Celsius (°C)</option>
+                  <option value="F">Fahrenheit (°F)</option>
+                </select>
+              </div>
+
               <div>
                 <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
                   Wind Speed
@@ -80,6 +93,8 @@ export const ApiConfigModal: React.FC<ApiConfigModalProps> = ({
                 >
                   <option value="km/h">Kilometers per hour (km/h)</option>
                   <option value="mph">Miles per hour (mph)</option>
+                  <option value="m/s">Meters per second (m/s)</option>
+                  <option value="knots">Knots (kn)</option>
                 </select>
               </div>
 
@@ -98,47 +113,36 @@ export const ApiConfigModal: React.FC<ApiConfigModalProps> = ({
                   <option value="miles">Miles (mi)</option>
                 </select>
               </div>
+
+              <div>
+                <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  Atmospheric Pressure
+                </label>
+                <select
+                  value={localUnits.pressure}
+                  onChange={(e) =>
+                    setLocalUnits({ ...localUnits, pressure: e.target.value as PressureUnit })
+                  }
+                  className="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-700/60 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+                >
+                  <option value="hPa">Hectopascals (hPa / mbar)</option>
+                  <option value="inHg">Inches of Mercury (inHg)</option>
+                  <option value="mmHg">Millimeters of Mercury (mmHg)</option>
+                </select>
+              </div>
             </div>
           </div>
 
-          {/* API Configuration & Guidance */}
+          {/* Privacy & Security Guarantee */}
           <div className="pt-2 border-t border-slate-100 dark:border-slate-700/80">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
-              API Integration
-            </h3>
-
-            {/* Default Status Badge */}
-            <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-xs text-emerald-800 dark:text-emerald-300 flex items-start gap-2.5">
-              <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+            <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-700/40 border border-slate-200/80 dark:border-slate-700/60 text-xs text-slate-600 dark:text-slate-300 flex items-start gap-2.5">
+              <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
               <div>
-                <span className="font-semibold block">Live Open-Meteo Integration Active</span>
+                <span className="font-semibold block text-slate-900 dark:text-white">Security & Privacy Hardened</span>
                 <span>
-                  The app is fully functioning with high-accuracy worldwide data from Open-Meteo,
-                  RainViewer radar, and OpenStreetMap. No proprietary API key is required to use this application!
+                  All weather queries are routed through a secured server-side proxy gateway. Your device IP and location are never stored or tracked.
                 </span>
               </div>
-            </div>
-
-            {/* Optional Custom API Key input */}
-            <div className="mt-3">
-              <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
-                Optional Custom Weather API Key (<code className="font-mono text-[11px]">WEATHER_API_KEY</code>)
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                  <Key className="w-4 h-4" />
-                </div>
-                <input
-                  type="password"
-                  value={apiKey}
-                  onChange={(e) => setApiKey(e.target.value)}
-                  placeholder="WEATHER_API_KEY (optional)"
-                  className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-700/60 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white placeholder-slate-400 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-sky-500"
-                />
-              </div>
-              <p className="text-[11px] text-slate-400 mt-1">
-                Stored safely in browser localStorage or injected via server environment.
-              </p>
             </div>
           </div>
 

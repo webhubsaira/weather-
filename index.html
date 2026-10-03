@@ -44,11 +44,45 @@
     <meta name="twitter:description" content="Track local temperatures, hourly precipitation, interactive Doppler radar, air quality, and severe storm warnings worldwide." />
     <meta name="twitter:image" content="https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=1200&auto=format&fit=crop" />
 
-    <!-- Schema.org JSON-LD Structured Data (Google Search Rich Snippets) -->
+    <!-- Schema.org JSON-LD Structured Data (Google Search Rich Snippets & Sitelinks) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://weathernow.live/#website",
+          "url": "https://weathernow.live/",
+          "name": "WeatherNow",
+          "description": "Hyper-local live weather forecast, interactive Doppler radar, air quality indices, and 7-day extended forecasts.",
+          "inLanguage": "en-US",
+          "publisher": {
+            "@id": "https://weathernow.live/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://weathernow.live/?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://weathernow.live/#organization",
+          "name": "WeatherNow",
+          "url": "https://weathernow.live/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://weathernow.live/favicon.svg"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "sairainfinityfree@gmail.com",
+            "contactType": "Customer Support"
+          }
+        },
         {
           "@type": "WebApplication",
           "@id": "https://weathernow.live/#app",
@@ -82,7 +116,7 @@
               "name": "How accurate is the WeatherNow live forecast?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "WeatherNow sources high-resolution meteorological models from leading global weather institutions via Open-Meteo, updating temperature, humidity, wind, and precipitation models continuously for hyper-local accuracy."
+                "text": "WeatherNow processes high-resolution meteorological models across international observation grids, updating temperature, humidity, wind, and precipitation models continuously for hyper-local accuracy."
               }
             },
             {
@@ -90,7 +124,7 @@
               "name": "How does the live weather radar map work?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The radar map streams real-time composite Doppler radar imagery and cloud cover layers provided by RainViewer and OpenStreetMap, allowing you to track rainstorms, snow, and cloud systems as they move."
+                "text": "The radar map streams real-time composite Doppler radar imagery and infrared cloud cover layers, allowing you to track rainstorms, snow tracks, and cloud systems as they evolve."
               }
             },
             {

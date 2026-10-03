@@ -7,7 +7,6 @@ const STORAGE_KEYS = {
   RECENT_SEARCHES: 'weathernow_recent_searches',
   LAST_LOCATION: 'weathernow_last_location',
   CACHED_WEATHER: 'weathernow_cached_weather',
-  API_KEY: 'weathernow_api_key',
 };
 
 export const DEFAULT_UNITS: UnitPreferences = {
@@ -210,21 +209,5 @@ export function saveCachedWeather(data: any): void {
     localStorage.setItem(STORAGE_KEYS.CACHED_WEATHER, JSON.stringify(data));
   } catch (e) {
     console.warn('Could not cache weather data:', e);
-  }
-}
-
-export function getCustomApiKey(): string {
-  try {
-    return localStorage.getItem(STORAGE_KEYS.API_KEY) || '';
-  } catch {
-    return '';
-  }
-}
-
-export function saveCustomApiKey(key: string): void {
-  try {
-    localStorage.setItem(STORAGE_KEYS.API_KEY, key.trim());
-  } catch (e) {
-    console.warn('Could not save api key:', e);
   }
 }

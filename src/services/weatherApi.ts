@@ -25,15 +25,13 @@ export const DEFAULT_LOCATION: GeoLocation = {
 };
 
 /**
- * Search locations using Open-Meteo Geocoding API
+ * Search locations using secure server-side Geocoding proxy
  */
 export async function searchLocations(query: string): Promise<GeoLocation[]> {
   const trimmed = query.trim();
   if (!trimmed || trimmed.length < 2) return [];
 
-  const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
-    trimmed
-  )}&count=8&language=en&format=json`;
+  const url = `/api/geocoding?query=${encodeURIComponent(trimmed)}`;
 
   try {
     const res = await fetch(url);
@@ -63,12 +61,11 @@ export async function searchLocations(query: string): Promise<GeoLocation[]> {
 }
 
 /**
- * Reverse geocode latitude and longitude to get city and country names
+ * Reverse geocode latitude and longitude through secure server-side proxy
  */
 export async function reverseGeocode(latitude: number, longitude: number): Promise<GeoLocation> {
   try {
-    // Free, client-friendly reverse geocoding
-    const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`;
+    const url = `/api/reverse-geocoding?latitude=${latitude}&longitude=${longitude}`;
     const res = await fetch(url);
     if (res.ok) {
       const data = await res.json();
@@ -87,7 +84,7 @@ export async function reverseGeocode(latitude: number, longitude: number): Promi
       };
     }
   } catch (err) {
-    console.warn('BigDataCloud reverse geocode error, falling back:', err);
+    console.warn('Reverse geocode error, falling back:', err);
   }
 
   // Fallback representation
@@ -329,11 +326,12 @@ export async function fetchWeatherData(location: GeoLocation): Promise<WeatherDa
   const tz =
     safeLocation.timezone && safeLocation.timezone !== 'auto' ? safeLocation.timezone : 'auto';
 
-  const forecastUrl = `https://api.open-meteo.com/v1/forecast?latitude=${safeLat}&longitude=${safeLon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,precipitation,weather_code,wind_speed_10m,is_day,uv_index&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,uv_index_max&timezone=${encodeURIComponent(
+  // Secure server-side proxy endpoints shield third-party providers from client inspection
+  const forecastUrl = `/api/weather?latitude=${safeLat}&longitude=${safeLon}&timezone=${encodeURIComponent(
     tz
-  )}&forecast_days=8`;
+  )}`;
 
-  const airQualityUrl = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${safeLat}&longitude=${safeLon}&current=european_aqi,us_aqi,pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,sulphur_dioxide,ozone&timezone=${encodeURIComponent(
+  const airQualityUrl = `/api/air-quality?latitude=${safeLat}&longitude=${safeLon}&timezone=${encodeURIComponent(
     tz
   )}`;
 

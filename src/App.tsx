@@ -43,6 +43,7 @@ import { AirQualityCard } from './components/AirQualityCard';
 import { WeatherAlerts } from './components/WeatherAlerts';
 import { FavoriteLocations } from './components/FavoriteLocations';
 import { SponsorBanner } from './components/SponsorBanner';
+import { AdPlacement } from './components/AdPlacement';
 import { Footer } from './components/Footer';
 import { LoadingSkeleton } from './components/LoadingSkeleton';
 import { ErrorMessage } from './components/ErrorMessage';
@@ -57,6 +58,9 @@ const WeatherMap = lazy(() =>
 );
 const WeatherFaq = lazy(() =>
   import('./components/WeatherFaq').then((m) => ({ default: m.WeatherFaq }))
+);
+const WeatherGuide = lazy(() =>
+  import('./components/WeatherGuide').then((m) => ({ default: m.WeatherGuide }))
 );
 const AboutSection = lazy(() =>
   import('./components/AboutSection').then((m) => ({ default: m.AboutSection }))
@@ -96,6 +100,7 @@ export default function App() {
   const airQualityRef = useRef<HTMLDivElement>(null);
   const favoritesRef = useRef<HTMLDivElement>(null);
   const faqRef = useRef<HTMLDivElement>(null);
+  const guideRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
 
   // Apply dark theme class to document element
@@ -251,6 +256,9 @@ export default function App() {
       case 'faq':
         targetRef = faqRef;
         break;
+      case 'guide':
+        targetRef = guideRef;
+        break;
       case 'about':
         targetRef = aboutRef;
         break;
@@ -374,6 +382,9 @@ export default function App() {
               />
             </div>
 
+            {/* High-viewability Monetization Ad Slot */}
+            <AdPlacement slotId="top-leaderboard" format="horizontal" />
+
             {/* Split Grid: 7-Day Forecast & Sunrise/Sunset (Both match height seamlessly without dead space) */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
               {/* 7-Day Forecast (8 cols on large screens) */}
@@ -467,6 +478,16 @@ export default function App() {
                 <WeatherFaq />
               </Suspense>
             </div>
+
+            {/* Educational Meteorological Science Guide for High-Search-Volume Keywords */}
+            <div ref={guideRef} className="scroll-mt-20">
+              <Suspense fallback={<div className="h-48 rounded-2xl bg-white/70 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800/80 animate-pulse" />}>
+                <WeatherGuide />
+              </Suspense>
+            </div>
+
+            {/* Bottom Content Monetization Placement */}
+            <AdPlacement slotId="bottom-content" format="horizontal" />
 
             {/* About & Privacy Section */}
             <div ref={aboutRef} className="scroll-mt-20">
