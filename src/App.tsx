@@ -68,6 +68,9 @@ const AboutSection = lazy(() =>
 const ApiConfigModal = lazy(() =>
   import('./components/ApiConfigModal').then((m) => ({ default: m.ApiConfigModal }))
 );
+const MediaKitModal = lazy(() =>
+  import('./components/MediaKitModal').then((m) => ({ default: m.MediaKitModal }))
+);
 
 export default function App() {
   // User Preferences
@@ -89,6 +92,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState<string>('overview');
   const [showSettingsModal, setShowSettingsModal] = useState<boolean>(false);
   const [showFavoritesModal, setShowFavoritesModal] = useState<boolean>(false);
+  const [showMediaKitModal, setShowMediaKitModal] = useState<boolean>(false);
 
   // Section references for smooth scrolling
   const overviewRef = useRef<HTMLDivElement>(null);
@@ -500,7 +504,20 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer onSelectSection={handleSelectSection} />
+      <Footer
+        onSelectSection={handleSelectSection}
+        onOpenMediaKitModal={() => setShowMediaKitModal(true)}
+      />
+
+      {/* Media Kit & Product Images Modal */}
+      {showMediaKitModal && (
+        <Suspense fallback={null}>
+          <MediaKitModal
+            isOpen={showMediaKitModal}
+            onClose={() => setShowMediaKitModal(false)}
+          />
+        </Suspense>
+      )}
 
       {/* Settings & API Config Modal */}
       {showSettingsModal && (

@@ -4,9 +4,10 @@ import { CloudSun, Heart } from 'lucide-react';
 interface FooterProps {
   onSelectSection: (sectionId: string) => void;
   onOpenPrivacyModal?: () => void;
+  onOpenMediaKitModal?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onSelectSection }) => {
+export const Footer: React.FC<FooterProps> = ({ onSelectSection, onOpenMediaKitModal }) => {
   return (
     <footer className="mt-8 border-t border-slate-200/90 dark:border-slate-800/80 bg-white/95 dark:bg-slate-950/80 backdrop-blur-md transition-colors shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -76,6 +77,14 @@ export const Footer: React.FC<FooterProps> = ({ onSelectSection }) => {
             >
               About & Privacy
             </button>
+            {onOpenMediaKitModal && (
+              <button
+                onClick={onOpenMediaKitModal}
+                className="px-2.5 py-1 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-400 hover:bg-sky-500/20 font-bold transition-all cursor-pointer"
+              >
+                Media Kit / Images
+              </button>
+            )}
           </nav>
         </div>
 
